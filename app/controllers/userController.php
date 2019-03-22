@@ -1,27 +1,20 @@
 <?php
 
-include 'app/User.php';
+require 'app/User.php';
 
-class UserController{
+class userController{
 
-  public static function login($user, $password){
-    $objUser = new user();
-    $objUser->setUser($user);
-    $objUser->setPassword($password);
-    //var_dump("userController login  $user $password");
+  public function getDataUser($user){
 
-    return userDAO::login($objUser);
-  }
-
-  public function getUser($user, $password){
       $objUser = new user();
       $objUser->setUser($user);
-      $objUser->setPassword($password);
 
-      return userDAO::getUser($objUser);
+      return user::getDataUser($objUser);
+
   }
 
   public function regUser($name, $email, $user, $password, $category){
+
       $objUser = new user();
       $objUser->setName($name);
       $objUser->setUser($user);
@@ -29,7 +22,8 @@ class UserController{
       $objUser->setCategory($category);
       $objUser->setPassword($password);
 
-      return userDAO::regUser($objUser);
+      return user::regUser($objUser);
+
   }
 
 }

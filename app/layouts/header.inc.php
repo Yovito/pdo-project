@@ -13,8 +13,9 @@
     <title>Starter Template for Bootstrap</title>
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="assets/css/overhang.min.css" />
-
+    <!-- <link rel="stylesheet" type="text/css" href="assets/css/overhang.min.css" /> -->
   </head>
-
   <body>
+    <?php
+      //Client Login page: Ajax interface can pre-declare the function to trap logins.
+      if(!$_SESSION['storage'])header("Location: ../login.php");?>

@@ -15,20 +15,7 @@ session_start();
 
   //Client Login page: Ajax interface can pre-declare the function to trap logins.
   if(!$_SESSION['storage']) {
-    header("Location: login.php");
-
+    header("Location: ../login.php");
   }else{
-    header("Location: app/dashboard.php");
+    header("Location: dashboard.php");
   }
-
-  /* Redirecciona a una página diferente en el mismo directorio el cual se hizo la petición */
-
-
-
-// $host  = $_SERVER['HTTP_HOST'];
-// $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-// var_dump($host);
-// var_dump($uri)
-// $extra = 'mypage.php';
-// header("Location: http://$host$uri/$extra");
-// exit;

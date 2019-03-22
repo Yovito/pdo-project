@@ -1,11 +1,75 @@
 <?php
 
-include 'app/db/conn.php';
-include 'app/class.user.php';
+require_once 'app/db/conn.php';
+//require 'app/class.user.php';
 
-class userDAO extends connection {
+class user extends connection {
 
     protected static $cnx;
+
+    private $id;
+    private $name;
+    private $user;
+    private $email;
+    private $password;
+    private $category;
+    private $reg_fec;
+
+    public function getId(){
+  		return $this->id;
+  	}
+
+  	public function setId($id){
+  		$this->id = $id;
+  	}
+
+  	public function getName(){
+  		return $this->name;
+  	}
+
+  	public function setName($name){
+  		$this->name = $name;
+  	}
+
+  	public function getUser(){
+  		return $this->user;
+  	}
+
+  	public function setUser($user){
+  		$this->user = $user;
+  	}
+
+  	public function getEmail(){
+  		return $this->email;
+  	}
+
+  	public function setEmail($email){
+  		$this->email = $email;
+  	}
+
+  	public function getPassword(){
+  		return $this->password;
+  	}
+
+  	public function setPassword($password){
+  		$this->password = $password;
+  	}
+
+  	public function getCategory(){
+  		return $this->category;
+  	}
+
+  	public function setCategory($category){
+  		$this->category = $category;
+  	}
+
+  	public function getReg_fec(){
+  		return $this->reg_fec;
+  	}
+
+  	public function setReg_fec($reg_fec){
+  		$this->reg_fec = $reg_fec;
+  	}
 
     private static function getConnection(){
       self::$cnx = connection::connect();
@@ -15,56 +79,28 @@ class userDAO extends connection {
       self::$cnx = null;
     }
 
-    public static function login($user){
+    public static function getDataUser($user){
 
-      // var_dump("USER-DAO ---> ");
-      // var_dump($user);
-
-      $query = "SELECT * FROM cp_user
-      WHERE user = :user AND password = :password";
-
-      self::getConnection();
-
-      $res = self::$cnx->prepare($query);
-      $res->bindValue(":user", $user->getUser());
-      $res->bindValue(":password", $user->getPassword());
-
-      $res->execute();
-
-      if ($res->rowCount() > 0) {
-        $rows = $res->fetch();
-        if ($rows["user"] == $user->getUser()
-        && $rows["password"] == $user->getPassword()) {
-          return true;
-        }
-      }
-    return false;
-    }
-
-    public static function getUser($user){
-
-        $query = "SELECT id,name,email,user,category,reg_fec FROM cp_user WHERE user = :user AND password = :password";
+        $query = "SELECT id,name,email,user,category,reg_fec FROM cp_user WHERE user = :user";
 
         self::getConnection();
 
-        $res = self::$cnx->prepare($query);
+        $rs = self::$cnx->prepare($query);
+        $rs->bindValue(":user", $user->getUser());
+        $rs->execute();
 
-        $res->bindValue(":user", $user->getUser());
-        $res->bindValue(":password", $user->getPassword());
-
-        $res->execute();
-
-        $rows = $res->fetch();
+        $data = $rs->fetch();
 
         $user = new user();
-        $user->setId($rows["id"]);
-        $user->setName($rows["name"]);
-        $user->setUser($rows["user"]);
-        $user->setEmail($rows["email"]);
-        $user->setCategory($rows["category"]);
-        $user->setReg_fec($rows["reg_fec"]);
+        $user->setId($data["id"]);
+        $user->setName($data["name"]);
+        $user->setUser($data["user"]);
+        $user->setEmail($data["email"]);
+        $user->setCategory($data["category"]);
+        $user->setReg_fec($data["reg_fec"]);
 
         return $user;
+
     }
 
     /**

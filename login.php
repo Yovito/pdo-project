@@ -1,9 +1,14 @@
 <!doctype html>
+<?php
+  session_start();
+  $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+  $extra = '/secure.inc.php';
+?>
+
 <html lang="en">
 <head>
-  <?php session_start();?>
   <meta charset="utf-8">
-  <title>.:::PDO:::.</title>
+  <title>.:::GAMARRA:::.</title>
   <!-- CDN bootstrap -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <script src="addons/js/app.js"></script>
@@ -21,7 +26,7 @@
       <div class="col-md-offset-2 col-md-8">
         <div class="page">
           <!-- <form id="loginForm" action="validarCode.php" method="POST" role="form"> -->
-          <form id="loginForm" action="./pdo-project/secure.inc.php" class="form-horizontal" role="form" method="POST">
+          <form id="loginForm" action="<?php echo $uri.$extra; ?>" class="form-horizontal" role="form" method="POST">
             <div class="form-group">
               <label for="txtUser">User</label>
               <input class="form-control" type="text" name="txtUser" value="">
