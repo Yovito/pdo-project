@@ -23,8 +23,6 @@ session_start();
 
   /* Redirecciona a una página diferente en el mismo directorio el cual se hizo la petición */
 
-
-
 // $host  = $_SERVER['HTTP_HOST'];
 // $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
 // var_dump($host);
